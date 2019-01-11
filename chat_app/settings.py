@@ -26,6 +26,7 @@ SECRET_KEY = 'j!pxvaomyfw8v2^*!sivm18q_c+o1a@q@rd8c-%^3n*dgt_3z1'
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    'localhost',
     '13.232.74.8',
     'angsumanray.eu.org'
 ]
