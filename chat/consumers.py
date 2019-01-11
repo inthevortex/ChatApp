@@ -2,6 +2,7 @@
 from channels.generic.websocket import AsyncWebsocketConsumer
 from urllib import parse
 import json
+import nltk
 
 
 class ChatConsumer(AsyncWebsocketConsumer):
@@ -47,6 +48,16 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 'message': username + ': ' + message
             }
         )
+
+        if 'czeck' in message:
+            tag_dict = nltk.pos_tag(nltk.word_tokenize(message[6:]))
+            await self.channel_layer.group_send(
+                self.room_group_name,
+                {
+                    'type': 'chat_message',
+                    'message': 'Parts of Speech dict: ' + str(tag_dict)
+                }
+            )
 
     # Receive message from room group
     async def chat_message(self, event):
