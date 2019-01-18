@@ -28,7 +28,8 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'localhost',
     '13.232.74.8',
-    'angsumanray.eu.org'
+    'angsumanray.eu.org',
+    '192.168.99.100'
 ]
 
 
@@ -92,10 +93,15 @@ CHANNEL_LAYERS = {
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'chat_app',
+        'USER': 'inthevortex',
+        'PASSWORD': 'inthevortex',
+        'HOST': '192.168.99.100',
+        'PORT': '5432',
     }
 }
+
 
 
 # Password validation

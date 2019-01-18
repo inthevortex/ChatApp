@@ -1,0 +1,36 @@
+version: "3"
+services:
+  web:
+    image: inthevortex/chat_app
+    depends_on:
+      - redis
+      - postgres
+    ports:
+      - "8000:8000"
+    networks:
+      - webnet
+  redis:
+    image: redis
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - "/home/docker/rdata:/data"
+    networks:
+      - webnet
+  postgres:
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - "/home/docker/pgdata:/var/lib/postgresql/data"
+    environment:
+      POSTGRES_USER: inthevortex
+      POSTGRES_PASSWORD: inthevortex
+      PGDATA: /var/lib/postgresql/data
+      POSTGRES_DB: chat_app
+    networks:
+      - webnet
+networks:
+  webnet:
